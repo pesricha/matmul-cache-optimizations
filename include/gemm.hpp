@@ -27,10 +27,8 @@ void gemm_ijk(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
 {
     for (std::size_t i = 0; i < M; ++i)
         for (std::size_t j = 0; j < N; ++j) {
-            T sum = T(0);
             for (std::size_t k = 0; k < K; ++k)
-                sum += A[i * K + k] * B[k * N + j];
-            C[i * N + j] = sum;
+                C[i * N + j] += A[i * K + k] * B[k * N + j];
         }
 }
 
@@ -52,10 +50,8 @@ void gemm_jik(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
 {
     for (std::size_t j = 0; j < N; ++j)
         for (std::size_t i = 0; i < M; ++i) {
-            T sum = T(0);
             for (std::size_t k = 0; k < K; ++k)
-                sum += A[i * K + k] * B[k * N + j];
-            C[i * N + j] = sum;
+                C[i * N + j] += A[i * K + k] * B[k * N + j];
         }
 }
 

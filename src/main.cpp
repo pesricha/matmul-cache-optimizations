@@ -6,7 +6,7 @@
 #include <string>
 #include <random>
 #include <map>
-#include "../include/gemm-cache-optimizations/gemm.hpp"
+#include "gemm.hpp"
 
 template<typename T>
 void benchmark_gemm() {

@@ -11,25 +11,17 @@ For matrix multiplication:
 
 $C = A \times B$
 
-The typical six loop orders are:
-
-1. `ijk`
-2. `ikj`
-3. `jik`
-4. `jki`
-5. `kij`
-6. `kji`
 
 #### Performance and Access Patterns
 
-| Order  | Typical Performance (Row-major)             | Similar Orders      |
-|--------|---------------------------------------------|---------------------|
-| **ikj**  | Best / Good                                 | kij                 |
-| ijk    | Medium / Decent                              | jik                 |
-| jik    | Medium / Decent                              | ijk                 |
-| kij    | Best / Good                                 | ikj                 |
-| kji    | Poor / Slow                                  | jki                 |
-| jki    | Poor / Slow                                  | kji                 |
+| Order  | Typical Performance (Row-major) | Similar Orders      |
+|--------|----------------------------------|---------------------|
+| **ikj**  | Best / Good                      | kij                 |
+| **kij**  | Best / Good                      | ikj                 |
+| ijk    | Medium / Decent                   | jik                 |
+| jik    | Medium / Decent                   | ijk                 |
+| kji    | Poor / Slow                       | jki                 |
+| jki    | Poor / Slow                       | kji                 |                        |
 
 ✅ **`ikj`** and **`kij`** are typically the fastest for row-major memory layout because they:
 - Access matrix `A` row-wise (good cache reuse).

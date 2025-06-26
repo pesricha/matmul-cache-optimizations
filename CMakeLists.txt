@@ -18,11 +18,15 @@ set(SRC_FILES
 # Create executable
 add_executable(gemm-cache-optimizations ${SRC_FILES})
 
-# Add compiler warnings
+# Add compiler warnings and optimization flags
 if (CMAKE_CXX_COMPILER_ID MATCHES "GNU|Clang")
-    target_compile_options(gemm-cache-optimizations PRIVATE -Wall -Wextra -pedantic)
+    target_compile_options(gemm-cache-optimizations PRIVATE 
+        -Wall -Wextra -pedantic -O3 -march=native -funroll-loops
+    )
 elseif (MSVC)
-    target_compile_options(gemm-cache-optimizations PRIVATE /W4)
+    target_compile_options(gemm-cache-optimizations PRIVATE 
+        /W4 /O2
+    )
 endif()
 
 # Optionally: installation
