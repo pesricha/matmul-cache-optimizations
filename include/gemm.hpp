@@ -27,8 +27,10 @@ void gemm_ijk(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
 {
     for (std::size_t i = 0; i < M; ++i)
         for (std::size_t j = 0; j < N; ++j) {
+            T sum = 0.0;
             for (std::size_t k = 0; k < K; ++k)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                sum += A[i * K + k] * B[k * N + j];
+            C[i * N + j] = sum;
         }
 }
 
@@ -38,9 +40,11 @@ void gemm_ikj(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
               std::size_t M, std::size_t N, std::size_t K)
 {
     for (std::size_t i = 0; i < M; ++i)
-        for (std::size_t k = 0; k < K; ++k)
+        for (std::size_t k = 0; k < K; ++k) {
+            T r = A[i * K + k];
             for (std::size_t j = 0; j < N; ++j)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                C[i * N + j] += r * B[k * N + j];
+        }
 }
 
 // jik
@@ -50,8 +54,10 @@ void gemm_jik(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
 {
     for (std::size_t j = 0; j < N; ++j)
         for (std::size_t i = 0; i < M; ++i) {
+            T sum = 0.0; 
             for (std::size_t k = 0; k < K; ++k)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                sum += A[i * K + k] * B[k * N + j];
+            C[i * N + j] = sum;
         }
 }
 
@@ -61,9 +67,11 @@ void gemm_jki(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
               std::size_t M, std::size_t N, std::size_t K)
 {
     for (std::size_t j = 0; j < N; ++j)
-        for (std::size_t k = 0; k < K; ++k)
+        for (std::size_t k = 0; k < K; ++k) {
+            T r = B[k * N + j];
             for (std::size_t i = 0; i < M; ++i)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                C[i * N + j] += A[i * K + k] * r;
+        }
 }
 
 // kij
@@ -72,9 +80,12 @@ void gemm_kij(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
               std::size_t M, std::size_t N, std::size_t K)
 {
     for (std::size_t k = 0; k < K; ++k)
-        for (std::size_t i = 0; i < M; ++i)
+        for (std::size_t i = 0; i < M; ++i) {
+            T r = A[i * K + k];
             for (std::size_t j = 0; j < N; ++j)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                C[i * N + j] += r * B[k * N + j];
+        }
+            
 }
 
 // kji
@@ -83,8 +94,10 @@ void gemm_kji(const std::vector<T>& A, const std::vector<T>& B, std::vector<T>& 
               std::size_t M, std::size_t N, std::size_t K)
 {
     for (std::size_t k = 0; k < K; ++k)
-        for (std::size_t j = 0; j < N; ++j)
+        for (std::size_t j = 0; j < N; ++j) {
+            T r = B[k * N + j];
             for (std::size_t i = 0; i < M; ++i)
-                C[i * N + j] += A[i * K + k] * B[k * N + j];
+                C[i * N + j] += A[i * K + k] * r;
+        }
 }
 
