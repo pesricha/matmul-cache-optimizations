@@ -1,4 +1,4 @@
-$ ./gemm-cache-optimizations 
+$ ./matmul-cache-optimizations
 Single precision (float):
 
 ===== GEMM Benchmarks (times in milliseconds) =====
