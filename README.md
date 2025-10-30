@@ -91,7 +91,7 @@ To build and run the project:
 
 ```bash
 # Clone the repository
-git clone https://github.com/pesricha/matmul-cache-optimizations
+git clone https://github.com/pesricha/matmul-cache-optimizations 
 cd matmul-cache-optimizations
 
 # Create build directory
@@ -103,6 +103,7 @@ make
 
 # Run the program
 ./matmul-cache-optimizations
+./matmul-block-optimizations
 ```
 
 ### Requirements
